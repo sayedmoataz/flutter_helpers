@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -17,7 +19,7 @@ class FirebaseHelper {
       );
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
-      print('Error: $e');
+      log('signUp Error is: $e');
       return null;
     }
   }
@@ -33,7 +35,7 @@ class FirebaseHelper {
       );
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
-      print('Error: $e');
+      log('signIn Error is: $e');
       return null;
     }
   }
@@ -50,7 +52,7 @@ class FirebaseHelper {
     try {
       await firestore.collection(collection).add(data);
     } catch (e) {
-      print('Error: $e');
+      log('addData Error is: $e');
     }
   }
 
@@ -62,7 +64,7 @@ class FirebaseHelper {
     try {
       await firestore.collection(collection).doc(docId).update(data);
     } catch (e) {
-      print('Error: $e');
+      log('updateData Error is: $e');
     }
   }
 
@@ -75,7 +77,7 @@ class FirebaseHelper {
           await firestore.collection(collection).doc(docId).get();
       return doc;
     } catch (e) {
-      print('Error: $e');
+      log('getData() Error is: $e');
       rethrow;
     }
   }
@@ -87,7 +89,7 @@ class FirebaseHelper {
     try {
       await firestore.collection(collection).doc(docId).delete();
     } catch (e) {
-      print('Error: $e');
+      log('deleteData() Error is: $e');
     }
   }
 }
